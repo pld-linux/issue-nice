@@ -124,7 +124,7 @@ EOF
 cat >$SCRIPT1<<EOF
 #!/bin/sh
 #avoid runnig fbv if /dev/fb? is absent
-if [ -a /proc/fb ]; then
+if [ -e /proc/fb ]; then
 	if [ -r  \$1 ]; then
 		/usr/bin/fbv -c -e -i -a -d 1 \$1
 	fi
