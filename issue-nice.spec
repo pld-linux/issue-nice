@@ -1,7 +1,6 @@
 #
 # TODO:
 #	- check all by sby more experienced, espiacially paths, please
-#	- why /usr/lib for noarch data? it can use /usr/share/%{name}.
 #
 
 %define	distname	Ra
@@ -54,7 +53,7 @@ Nice (and big) PLD Linux release file - some tools.
 %description devel -l pl
 £adny (i du¿y) plik wersji Linuksa PLD - parê narzêdzi.
 
-%define	data	%{_libdir}/%{name}
+%define	data	%{_datadir}/%{name}
 
 %prep
 
