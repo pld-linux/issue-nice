@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
