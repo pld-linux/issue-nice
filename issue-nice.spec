@@ -5,6 +5,7 @@
 
 %define	distname	Ra
 %define	distversion	1.0
+%define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
@@ -37,8 +38,6 @@ Obsoletes:	issue-alpha
 Obsoletes:	issue-fancy
 Obsoletes:	issue-logo
 Obsoletes:	issue-pure
-
-%define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 %description
 Nice (and big) PLD Linux release file.
@@ -180,8 +179,6 @@ EOF
 
 chmod +x $SCRIPT0
 
-echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
-
 # issue.0.fb
 head -15 $TEMPLATE|\
 	$SCRIPT0 "10 10 10 10 20 22 10 11 11 11 10  8  8  8  8" "47 47 47 47 47 47 47 47 47 47 47 47 47 47 47" %{data}/\
@@ -208,6 +205,7 @@ echo -n "%l " >> $RPM_BUILD_ROOT%{_sysconfdir}/issue
 head -11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.net
 
+echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
 
 %clean
 rm -rf $RPM_BUILD_ROOT
