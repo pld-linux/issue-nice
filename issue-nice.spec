@@ -29,6 +29,7 @@ Source14:	issue-nice-live.png
 # With official PLD logo
 Source15:	issue-nice-pldlogo.png
 BuildRequires:	awk
+BuildRequires:	rpmbuild(macros) >= 1.176
 BuildRequires:	sed
 Requires:	fbgetty
 Requires:	fbv >= 0.99-2
@@ -230,8 +231,11 @@ echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
 rm -rf $RPM_BUILD_ROOT
 
 %post
-echo "If you want to see an image, remember to adjust your /etc/inittab line like this:"
-echo "2:2345:respawn:/usr/sbin/fbgetty --issue=/etc/issue.0.fb tty2"
+%banner %{name} -e << EOF
+If you want to see an image, remember to adjust your
+/etc/inittab line like this:
+2:2345:respawn:/usr/sbin/fbgetty --issue=/etc/issue.0.fb tty2
+EOF
 
 %files
 %defattr(644,root,root,755)
