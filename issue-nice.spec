@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -181,7 +181,7 @@ cat >$SCRIPT6<<EOF
 #!/bin/sh
 #fbgetty includes also "\n" :/
 [ -r /proc/cpuinfo ] || exit;
-echo -n \`cat /proc/cpuinfo|grep "cpu MHz"|cut -c12-\`
+echo -n \`cat /proc/cpuinfo|egrep "clock|cpu MHz"|sed 's/[^0-9]*//'\`
 EOF
 
 chmod +x $SCRIPT0
