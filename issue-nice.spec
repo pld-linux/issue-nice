@@ -231,7 +231,7 @@ echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%banner %{name} -e << EOF
+%banner %{name} -e <<EOF
 If you want to see an image, remember to adjust your
 /etc/inittab line like this:
 2:2345:respawn:/usr/sbin/fbgetty --issue=/etc/issue.0.fb tty2
