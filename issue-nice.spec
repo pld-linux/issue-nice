@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -19,11 +19,13 @@ Source0:	issue-make.sh
 # Based on mimooh's work
 Source10:	issue-nice-tutorial.xcf.gz
 # Based on mimooh's work
-Source11:	stork0.png
+Source11:	issue-nice-powered.png
 # Based on mimooh's work
-Source12:	stork1.png
+Source12:	issue-nice-ac.png
 # Based on mimooh's work
-Source13:	stork2.png
+Source13:	issue-nice-machine.png
+# Based on mimooh's work
+Source14:	issue-nice-live.png
 BuildRequires:	awk
 BuildRequires:	sed
 Requires:	fbgetty
@@ -71,6 +73,7 @@ install %{SOURCE10} $RPM_BUILD_ROOT%{data}/tutorial.xcf.gz
 install %{SOURCE11} $RPM_BUILD_ROOT%{data}
 install %{SOURCE12} $RPM_BUILD_ROOT%{data}
 install %{SOURCE13} $RPM_BUILD_ROOT%{data}
+install %{SOURCE14} $RPM_BUILD_ROOT%{data}
 
 TEMPLATE=$RPM_BUILD_ROOT%{data}/issue.template.fb
 TEMPLATE2=$RPM_BUILD_ROOT%{data}/issue.template2.fb
@@ -98,7 +101,7 @@ cat >$TEMPLATE<<EOF
 \e[36mCurrent runlevel 	.: \e[1m\$RUNLEVEL \e[0m
 \e[36mTerminal type 	.: \e[1m\$TERM \e[0m
 \e[36mProcessor type 	.: \e[1m@@uname-p@@ \e[0m
-\e[36mRandom number 	.: \e[1m@@random@@ \e[0m
+\e[36mProcessor speed 	.: \e[1m@@cpumhz@@ \e[0m
 EOF
 cat >$TEMPLATE2<<EOF
 \e[0;32m@@procnum@@ \e[0m
@@ -197,9 +200,15 @@ head -15 $TEMPLATE2|\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE13}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
 
+# issue.3.fb
+head -15 $TEMPLATE|\
+	$SCRIPT0 "29 29 29 29 29 29 29 29 30 29 28 28 26 23 20" "00 00 00 00 45 49 53 57 61 60 59 58 57 56 55" %{data}/\
+	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.3.fb
+echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE14}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.3.fb
+
 # issue, issue.net
 head -15 $TEMPLATE|\
-	$SCRIPT0 "16 16 16 15 35 35 31 32 15 25 22 23 26 25 26" "40 40 40 40 40 40 40 40 40 40 40 40 40 40 40" %{data}/\
+	$SCRIPT0 "16 16 16 16 35 35 31 32 15 25 22 23 26 25 24" "40 40 40 40 40 40 40 40 40 40 40 40 40 40 40" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue
 echo -n "%l " >> $RPM_BUILD_ROOT%{_sysconfdir}/issue
 head -11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
