@@ -14,10 +14,15 @@ Release:	1
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
+#images begins at Source10
 # Based on mimooh's work
-Source1:	stork0.png
+Source10:	issue-nice-tutorial.xcf.gz
 # Based on mimooh's work
-Source2:	stork1.png
+Source11:	stork0.png
+# Based on mimooh's work
+Source12:	stork1.png
+# Based on mimooh's work
+Source13:	stork2.png
 BuildRequires:	awk
 BuildRequires:	sed
 Requires:	fbgetty
@@ -48,10 +53,10 @@ Group:		Development
 Requires:	awk
 
 %description devel
-Nice (and big) PLD Linux release file - some tools.
+Nice (and big) PLD Linux release file - some tools and samples.
 
 %description devel -l pl
-£adny (i du¿y) plik wersji Linuksa PLD - parê narzêdzi.
+£adny (i du¿y) plik wersji Linuksa PLD - parê narzêdzi i przyk³adów.
 
 %define	data	%{_datadir}/%{name}
 
@@ -63,14 +68,20 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 install -d $RPM_BUILD_ROOT%{data}
 
 install %{SOURCE0} $RPM_BUILD_ROOT%{data}
-install %{SOURCE1} $RPM_BUILD_ROOT%{data}
-install %{SOURCE2} $RPM_BUILD_ROOT%{data}
+install %{SOURCE10} $RPM_BUILD_ROOT%{data}/tutorial.xcf.gz
+install %{SOURCE11} $RPM_BUILD_ROOT%{data}
+install %{SOURCE12} $RPM_BUILD_ROOT%{data}
+install %{SOURCE13} $RPM_BUILD_ROOT%{data}
 
 TEMPLATE=$RPM_BUILD_ROOT%{data}/issue.template.fb
+TEMPLATE2=$RPM_BUILD_ROOT%{data}/issue.template2.fb
 SCRIPT0=$RPM_BUILD_ROOT%{data}/issue-make.sh
 SCRIPT1=$RPM_BUILD_ROOT%{data}/fbv-wrapper.sh
 SCRIPT2=$RPM_BUILD_ROOT%{data}/uname-p.sh
 SCRIPT3=$RPM_BUILD_ROOT%{data}/random.sh
+SCRIPT4=$RPM_BUILD_ROOT%{data}/uptime.sh
+SCRIPT5=$RPM_BUILD_ROOT%{data}/procnum.sh
+SCRIPT6=$RPM_BUILD_ROOT%{data}/cpumhz.sh
 
 # warning! there are <space><tab> - they must be
 cat >$TEMPLATE<<EOF
@@ -90,7 +101,23 @@ cat >$TEMPLATE<<EOF
 \e[36mProcessor type 	.: \e[1m@@uname-p@@ \e[0m
 \e[36mRandom number 	.: \e[1m@@random@@ \e[0m
 EOF
+cat >$TEMPLATE2<<EOF
+\e[0;32m@@procnum@@ \e[0m
+\e[0;32m%r \e[0m
+\e[0;32m%n \e[0m
 
+\e[0;32m%u \e[0m
+\e[0;32m%l \e[0m
+\e[0;32m\$RUNLEVEL \e[0m
+
+\e[0;32m@@cpumhz@@ \e[0m
+\e[0;32m%t \e[0m
+\e[0;32m@@uname-p@@ \e[0m
+\e[0;32m%d \e[0m
+\e[0;32m%m \e[0m
+
+\e[0;32m@@uptime@@ \e[0m
+EOF
 # some small scripts (can they be here or move them to seperated files?)
 
 cat >$SCRIPT1<<EOF
@@ -114,6 +141,42 @@ cat >$SCRIPT3<<EOF
 #fbgetty includes also "\n" :/
 echo -n \$RANDOM
 EOF
+cat >$SCRIPT4<<EOF
+#!/bin/sh
+#fbgetty includes also "\n" :/
+#!/bin/sh
+[ -r /proc/uptime ] || exit;
+UPTIMEFILE="/proc/uptime";
+SEK=\`cat \$UPTIMEFILE|cut -d'.' -f1\`;
+MIN=\$(( \$SEK / 60 ));
+GOD=\$(( \$MIN / 60 ));
+DOB=\$(( \$GOD / 24 ));
+GOD2=\$((\$GOD-\$DOB*24));
+MIN2=\$((\$MIN-\$GOD*60));
+
+STR1="\${DOB}d";
+STR2="\${GOD2}h";
+STR3="\${MIN2}m";
+
+if [ \$DOB -eq 0 ];then
+	STR1="";
+	if [ \$GOD2 -eq 0 ];then
+		STR2=""
+	fi
+fi
+echo -n \$STR1\$STR2\$STR3
+EOF
+cat >$SCRIPT5<<EOF
+#!/bin/sh
+#fbgetty includes also "\n" :/
+echo -n \`ls /proc/|grep ^[0-9]|wc -l\`
+EOF
+cat >$SCRIPT6<<EOF
+#!/bin/sh
+#fbgetty includes also "\n" :/
+[ -r /proc/cpuinfo ] || exit;
+echo -n \`cat /proc/cpuinfo|grep "cpu MHz"|cut -c12-\`
+EOF
 
 chmod +x $SCRIPT0
 
@@ -123,13 +186,19 @@ echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
 head -15 $TEMPLATE|\
 	$SCRIPT0 "10 10 10 10 20 22 10 11 11 11 10  8  8  8  8" "47 47 47 47 47 47 47 47 47 47 47 47 47 47 47" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.0.fb
-echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE1}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.0.fb
+echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE11}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.0.fb
 
 # issue.1.fb
 head -15 $TEMPLATE|\
 	$SCRIPT0 "17 17 17 17 22 23 24 24 24 25 25 25 26 27 20" "60 60 60 60 60 60 60 60 60 60 60 60 60 60 60" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.1.fb
-echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE2}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.1.fb
+echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE12}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.1.fb
+
+# issue.2.fb
+head -15 $TEMPLATE2|\
+	$SCRIPT0 "62 20 53 00 21 61 22 00 61 07 58 07 66 00 16" "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" %{data}/\
+	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
+echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE13}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
 
 # issue, issue.net
 head -15 $TEMPLATE|\
@@ -155,8 +224,12 @@ echo "2:2345:respawn:/usr/sbin/fbgetty --issue=/etc/issue.0.fb tty2"
 %attr(755,root,root) %{data}/fbv-wrapper.sh
 %attr(755,root,root) %{data}/uname-p.sh
 %attr(755,root,root) %{data}/random.sh
+%attr(755,root,root) %{data}/uptime.sh
+%attr(755,root,root) %{data}/procnum.sh
+%attr(755,root,root) %{data}/cpumhz.sh
 
 %files devel
 %defattr(644,root,root,755)
-%{data}/issue.template.fb
+%{data}/*.fb
 %{data}/issue-make.sh
+%{data}/*.xcf.gz

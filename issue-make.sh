@@ -36,6 +36,9 @@ function multichar(ch, count){
 {
 	gsub("@@uname-p@@","`" datadir "uname-p.sh`");
 	gsub("@@random@@","`" datadir "random.sh`");
+	gsub("@@cpumhz@@","`" datadir "cpumhz.sh`");
+	gsub("@@uptime@@","`" datadir "uptime.sh`");
+	gsub("@@procnum@@","`" datadir "procnum.sh`");
 }
 /\t/ {
 	split($0,field1,"\t");
