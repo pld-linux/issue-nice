@@ -27,7 +27,7 @@ Source13:	issue-nice-machine.png
 # Based on mimooh's work
 Source14:	issue-nice-live.png
 # With official PLD logo
-Source14:	issue-nice-pldlogo.png
+Source15:	issue-nice-pldlogo.png
 BuildRequires:	awk
 BuildRequires:	sed
 Requires:	fbgetty
@@ -75,6 +75,7 @@ install %{SOURCE11} $RPM_BUILD_ROOT%{data}
 install %{SOURCE12} $RPM_BUILD_ROOT%{data}
 install %{SOURCE13} $RPM_BUILD_ROOT%{data}
 install %{SOURCE14} $RPM_BUILD_ROOT%{data}
+install %{SOURCE15} $RPM_BUILD_ROOT%{data}
 
 TEMPLATE=$RPM_BUILD_ROOT%{data}/issue.template.fb
 TEMPLATE2=$RPM_BUILD_ROOT%{data}/issue.template2.fb
@@ -213,7 +214,7 @@ head -15 $TEMPLATE|\
 	awk 'NR==3 {print "\e[1;31m --==< [\e[0;35m Welcome to \e[1;35mPLD\e[0;35m Linux Distribution\e[1;31m ] >==-- \e[0m";next;} {print;}'|\
 	$SCRIPT0 "17 17 17 17 08 09 11 12 12 13 13 13 13 13 13" "00 00 00 00 60 60 60 60 60 60 60 60 60 60 60" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.4.fb
-echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE14}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.4.fb
+echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE15}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.4.fb
 
 # issue, issue.net
 head -15 $TEMPLATE|\
