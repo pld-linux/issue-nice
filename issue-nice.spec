@@ -45,7 +45,7 @@ Nice (and big) PLD Linux release file.
 %package devel
 Summary:	Nice PLD Linux release file toolbox
 Summary(pl):	£adna wersja Linuksa PLD - narzêdzia
-Group:		-
+Group:		Development
 Requires:	awk
 
 %description devel
