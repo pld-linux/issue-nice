@@ -4,14 +4,14 @@
 #
 
 %define	distname	Ra
-%define	distversion	1.0
+%define	distversion	1.1
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	2
+Release:	1
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -65,8 +65,7 @@ Nice (and big) PLD Linux release file - some tools and samples.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
-install -d $RPM_BUILD_ROOT%{data}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{data}}
 
 install %{SOURCE0} $RPM_BUILD_ROOT%{data}
 install %{SOURCE10} $RPM_BUILD_ROOT%{data}/tutorial.xcf.gz
