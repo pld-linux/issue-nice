@@ -1,6 +1,7 @@
 #
 # TODO:
 #	- check all by sby more experienced, espiacially paths, please
+#	- why /usr/lib for noarch data? it can use /usr/share/%{name}.
 #
 
 %define	distname	Ra
@@ -18,9 +19,12 @@ Source0:	issue-make.sh
 Source1:	stork0.png
 # Based on mimooh's work
 Source2:	stork1.png
-Buildarch:	noarch
 BuildRequires:	awk
 BuildRequires:	sed
+Requires:	fbgetty
+Requires:	fbv >= 0.99-2
+Requires:	which
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	redhat-release
 Obsoletes:	mandrake-release
@@ -29,9 +33,6 @@ Obsoletes:	issue-alpha
 Obsoletes:	issue-fancy
 Obsoletes:	issue-logo
 Obsoletes:	issue-pure
-Requires:	which
-Requires:	fbv >= 0.99-2
-Requires:	fbgetty
 
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
@@ -51,7 +52,7 @@ Requires:	awk
 Nice (and big) PLD Linux release file - some tools.
 
 %description devel -l pl
-£adny (i du¿y) plik wersji Linuksa PLD - pare narzêdzi.
+£adny (i du¿y) plik wersji Linuksa PLD - parê narzêdzi.
 
 %define	data	%{_libdir}/%{name}
 
