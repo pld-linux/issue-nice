@@ -3,8 +3,8 @@
 #	- check all by sby more experienced, espiacially paths, please
 #
 
-%define	distname	Ra
-%define	distversion	1.1
+%define	distname	Ac
+%define	distversion	1.99
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
