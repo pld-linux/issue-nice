@@ -33,7 +33,6 @@ Requires:	which
 Requires:	fbv >= 0.99-2
 Requires:	fbgetty
 
-
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 %description
@@ -54,8 +53,9 @@ Nice (and big) PLD Linux release file - some tools.
 %description devel -l pl
 £adny (i du¿y) plik wersji Linuksa PLD - pare narzêdzi.
 
-
 %define	data	%{_libdir}/%{name}
+
+%prep
 
 %install
 rm -rf $RPM_BUILD_ROOT
