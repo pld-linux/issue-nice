@@ -186,42 +186,42 @@ EOF
 chmod +x $SCRIPT0
 
 # issue.0.fb
-head -15 $TEMPLATE|\
+head -n 15 $TEMPLATE|\
 	$SCRIPT0 "10 10 10 10 20 22 10 11 11 11 10  8  8  8  8" "47 47 47 47 47 47 47 47 47 47 47 47 47 47 47" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.0.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE11}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.0.fb
 
 # issue.1.fb
-head -15 $TEMPLATE|\
+head -n 15 $TEMPLATE|\
 	$SCRIPT0 "17 17 17 17 22 23 24 24 24 25 25 25 26 27 20" "60 60 60 60 60 60 60 60 60 60 60 60 60 60 60" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.1.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE12}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.1.fb
 
 # issue.2.fb
-head -15 $TEMPLATE2|\
+head -n 15 $TEMPLATE2|\
 	$SCRIPT0 "62 20 53 00 21 61 22 00 61 07 58 07 66 00 16" "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE13}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.2.fb
 
 # issue.3.fb
-head -15 $TEMPLATE|\
+head -n 15 $TEMPLATE|\
 	$SCRIPT0 "29 29 29 29 29 29 29 29 30 29 28 28 26 23 20" "00 00 00 00 45 49 53 57 61 60 59 58 57 56 55" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.3.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE14}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.3.fb
 
 # issue.4.fb
-head -15 $TEMPLATE|\
+head -n 15 $TEMPLATE|\
 	awk 'NR==3 {print "\e[1;31m --==< [\e[0;35m Welcome to \e[1;35mPLD\e[0;35m Linux Distribution\e[1;31m ] >==-- \e[0m";next;} {print;}'|\
 	$SCRIPT0 "17 17 17 17 08 09 11 12 12 13 13 13 13 13 13" "00 00 00 00 60 60 60 60 60 60 60 60 60 60 60" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.4.fb
 echo -n "\`%{data}/fbv-wrapper.sh %{data}/`basename %{SOURCE15}`\`%l " >>$RPM_BUILD_ROOT%{_sysconfdir}/issue.4.fb
 
 # issue, issue.net
-head -15 $TEMPLATE|\
+head -n 15 $TEMPLATE|\
 	$SCRIPT0 "16 16 16 16 35 35 31 32 15 25 22 23 26 25 24" "40 40 40 40 40 40 40 40 40 40 40 40 40 40 40" %{data}/\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue
 echo -n "%l " >> $RPM_BUILD_ROOT%{_sysconfdir}/issue
-head -11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
+head -n 11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.net
 
 echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
