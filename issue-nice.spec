@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -124,10 +124,11 @@ EOF
 cat >$SCRIPT1<<EOF
 #!/bin/sh
 #avoid runnig fbv if /dev/fb? is absent
-#help: how to recognize it better?
-grep "^vesafb: framebuffer at" /var/log/dmesg >/dev/null 2>&1 && \\
-	[ -x `which fbv 2>/dev/null` -a -f \$1 ] && \\
-		`which fbv 2>/dev/null` -c -e -i -a -d 1 \$1
+if [ -a /proc/fb ]; then
+	if [ -r  $1 ]; then
+		/usr/bin/fbv -c -e -i -a -d 1 $1
+	fi
+fi
 EOF
 
 cat >$SCRIPT2<<EOF
