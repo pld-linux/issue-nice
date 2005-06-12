@@ -241,6 +241,7 @@ EOF
 %defattr(644,root,root,755)
 %{_sysconfdir}/pld-release
 %config(noreplace) %{_sysconfdir}/issue*
+%dir %{data}
 %{data}/*.png
 %attr(755,root,root) %{data}/fbv-wrapper.sh
 %attr(755,root,root) %{data}/uname-p.sh
