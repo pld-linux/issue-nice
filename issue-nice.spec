@@ -28,9 +28,7 @@ Source13:	issue-nice-machine.png
 Source14:	issue-nice-live.png
 # With official PLD logo
 Source15:	issue-nice-pldlogo.png
-BuildRequires:	awk
 BuildRequires:	rpmbuild(macros) >= 1.176
-BuildRequires:	sed
 Requires:	fbgetty
 Requires:	fbv >= 0.99-2
 Requires:	which
