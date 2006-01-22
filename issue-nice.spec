@@ -4,14 +4,14 @@
 #
 
 %define	distname	Ac
-%define	distversion	1.99
+%define	distversion	2.0
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
 Summary(pl):	£adna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	4
+Release:	1
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
