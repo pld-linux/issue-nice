@@ -8,7 +8,7 @@
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
-Summary(pl.UTF-8):   Ładna wersja Linuksa PLD
+Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
 Release:	1
@@ -50,7 +50,7 @@ Nice (and big) PLD Linux release file.
 
 %package devel
 Summary:	Nice PLD Linux release file toolbox
-Summary(pl.UTF-8):   Ładna wersja Linuksa PLD - narzędzia
+Summary(pl.UTF-8):	Ładna wersja Linuksa PLD - narzędzia
 Group:		Development
 Requires:	awk
 
