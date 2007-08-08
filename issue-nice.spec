@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -32,10 +32,13 @@ BuildRequires:	rpmbuild(macros) >= 1.176
 Requires:	fbgetty
 Requires:	fbv >= 0.99-2
 Requires:	which
-BuildArch:	noarch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	issue
+Provides:	issue-package
+Obsoletes:	issue-package
 Obsoletes:	redhat-release
 Obsoletes:	mandrake-release
+BuildArch:	noarch
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Nice (and big) PLD Linux release file.
