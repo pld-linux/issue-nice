@@ -18,6 +18,7 @@ Source0:	issue-make.sh
 #images begins at Source10
 # Based on mimooh's work
 Source10:	issue-nice-tutorial.xcf.gz
+# Source10-md5:	0dd6397a57b526fac3829ca7d1e0acf7
 # Based on mimooh's work
 Source11:	issue-nice-powered.png
 # Based on mimooh's work
