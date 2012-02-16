@@ -11,7 +11,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	3
+Release:	4
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -36,8 +36,6 @@ Requires:	which
 Provides:	issue
 Provides:	issue-package
 Obsoletes:	issue-package
-Obsoletes:	redhat-release
-Obsoletes:	mandrake-release
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -224,6 +222,18 @@ head -n 11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
 
 echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
 
+# CPE_NAME = cpe:/ {part} : {vendor} : {product} : {version} : {update} : {edition} : {language}
+# http://cpe.mitre.org/specification/
+cat >$RPM_BUILD_ROOT%{_sysconfdir}/os-release <<EOF
+NAME="PLD Linux"
+VERSION="%{distversion} (%{distname})"
+ID="pld"
+VERSION_ID="%{distversion}"
+PRETTY_NAME="PLD Linux %{distversion} (%{distname})"
+ANSI_COLOR="0;32"
+CPE_NAME="cpe:/o:pld-linux:pld:%{distversion}"
+EOF
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -236,6 +246,7 @@ EOF
 
 %files
 %defattr(644,root,root,755)
+%{_sysconfdir}/os-release
 %{_sysconfdir}/pld-release
 %config(noreplace) %{_sysconfdir}/issue*
 %dir %{data}
