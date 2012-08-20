@@ -3,15 +3,30 @@
 #	- check all by sby more experienced, espiacially paths, please
 #
 
+%bcond_with	snap	# include shapshot information in version,
+			# should be used only in official Th spanhots
+
+%define snapshot	2012
+
+# CPE_NAME = cpe:/ {part} : {vendor} : {product} : {version} : {update} : {edition} : {language}
+# http://cpe.mitre.org/specification/
+# http://csrc.nist.gov/publications/nistir/ir7695/NISTIR-7695-CPE-Naming.pdf
+
+%if %{with snap}
+%define	distname	Th/%{snapshot}
+%define cpename		cpe:/o:pld-linux:pld:%{distversion}:%{snapshot}
+%else
 %define	distname	Th
-%define	distversion	2.99
+%define cpename		cpe:/o:pld-linux:pld:%{distversion}
+%endif
+%define	distversion	3.0
 %define	distrelease	"%{distversion} PLD Linux (%{distname})"
 
 Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	4
+Release:	1%{?with_snap:.%{snapshot}}
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -36,6 +51,10 @@ Requires:	which
 Provides:	issue
 Provides:	issue-package
 Obsoletes:	issue-package
+Conflicts:	issue-alpha < 3.0
+Conflicts:	issue-fancy < 3.0
+Conflicts:	issue-logo < 3.0
+Conflicts:	issue-pure < 3.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -231,7 +250,8 @@ ID="pld"
 VERSION_ID="%{distversion}"
 PRETTY_NAME="PLD Linux %{distversion} (%{distname})"
 ANSI_COLOR="0;32"
-CPE_NAME="cpe:/o:pld-linux:pld:%{distversion}"
+CPE_NAME="%{cpename}"
+HOME_URL="http://www.pld-linux.org/"
 EOF
 
 %clean
