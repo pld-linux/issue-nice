@@ -51,10 +51,10 @@ Requires:	which
 Provides:	issue
 Provides:	issue-package
 Obsoletes:	issue-package
-Conflicts:	issue-alpha < 3.0
-Conflicts:	issue-fancy < 3.0
-Conflicts:	issue-logo < 3.0
-Conflicts:	issue-pure < 3.0
+Conflicts:	issue-alpha < 3.0-1
+Conflicts:	issue-fancy < 3.0-1
+Conflicts:	issue-logo < 3.0-1
+Conflicts:	issue-pure < 3.0-1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
