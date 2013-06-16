@@ -3,7 +3,7 @@
 #	- check all by sby more experienced, espiacially paths, please
 #
 %define	distnamever	%(. /etc/os-release && echo $VERSION)
-%define	distversion	%(. /etc/os-release && echo $VERSION_ID)
+%define	distversion	%(. /etc/os-release && echo ${VERSION_ID:-0})
 
 Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
