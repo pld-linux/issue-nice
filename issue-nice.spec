@@ -2,31 +2,14 @@
 # TODO:
 #	- check all by sby more experienced, espiacially paths, please
 #
-
-%bcond_with	snap	# include shapshot information in version,
-			# should be used only in official Th spanhots
-
-%define snapshot	2012
-
-# CPE_NAME = cpe:/ {part} : {vendor} : {product} : {version} : {update} : {edition} : {language}
-# http://cpe.mitre.org/specification/
-# http://csrc.nist.gov/publications/nistir/ir7695/NISTIR-7695-CPE-Naming.pdf
-
-%if %{with snap}
-%define	distname	Th/%{snapshot}
-%define cpename		cpe:/o:pld-linux:pld:%{distversion}:%{snapshot}
-%else
-%define	distname	Th
-%define cpename		cpe:/o:pld-linux:pld:%{distversion}
-%endif
-%define	distversion	3.0
-%define	distrelease	"%{distversion} PLD Linux (%{distname})"
+%define	distnamever	%(. /etc/os-release && echo $VERSION)
+%define	distversion	%(. /etc/os-release && echo $VERSION_ID)
 
 Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	%{distversion}
-Release:	1%{?with_snap:.%{snapshot}}
+Release:	2
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -49,8 +32,6 @@ Requires:	fbgetty
 Requires:	fbv >= 0.99-2
 Requires:	which
 Provides:	issue
-Provides:	issue-package
-Obsoletes:	issue-package
 Conflicts:	issue-alpha < 3.0-1
 Conflicts:	issue-fancy < 3.0-1
 Conflicts:	issue-logo < 3.0-1
@@ -239,22 +220,6 @@ echo -n "%l " >> $RPM_BUILD_ROOT%{_sysconfdir}/issue
 head -n 11 $RPM_BUILD_ROOT%{_sysconfdir}/issue|sed 's/\\e[^m]*m//g'\
 	>$RPM_BUILD_ROOT%{_sysconfdir}/issue.net
 
-echo %{distrelease} > $RPM_BUILD_ROOT%{_sysconfdir}/pld-release
-
-# CPE_NAME = cpe:/ {part} : {vendor} : {product} : {version} : {update} : {edition} : {language}
-# http://cpe.mitre.org/specification/
-cat >$RPM_BUILD_ROOT%{_sysconfdir}/os-release <<EOF
-NAME="PLD Linux"
-VERSION="%{distversion} (%{distname})"
-ID="pld"
-VERSION_ID="%{distversion}"
-PRETTY_NAME="PLD Linux %{distversion} (%{distname})"
-ANSI_COLOR="0;32"
-CPE_NAME="%{cpename}"
-HOME_URL="http://www.pld-linux.org/"
-BUG_REPORT_URL="http://bugs.pld-linux.org/"
-EOF
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -267,8 +232,6 @@ EOF
 
 %files
 %defattr(644,root,root,755)
-%{_sysconfdir}/os-release
-%{_sysconfdir}/pld-release
 %config(noreplace) %{_sysconfdir}/issue*
 %dir %{data}
 %{data}/*.png
