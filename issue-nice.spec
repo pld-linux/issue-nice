@@ -27,6 +27,8 @@ Source13:	issue-nice-machine.png
 Source14:	issue-nice-live.png
 # With official PLD logo
 Source15:	issue-nice-pldlogo.png
+BuildRequires:	pld-release >= 3.0
+%requires_eq	pld-release
 BuildRequires:	rpmbuild(macros) >= 1.176
 Requires:	fbgetty
 Requires:	fbv >= 0.99-2
