@@ -8,7 +8,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	3.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
@@ -32,7 +32,7 @@ BuildRequires:	rpmbuild(macros) >= 1.176
 Requires:	fbgetty
 Requires:	fbv >= 0.99-2
 Requires:	which
-Provides:	issue
+Provides:	issue = %{version}-%{release}
 Conflicts:	issue-alpha < 3.0-1
 Conflicts:	issue-fancy < 3.0-1
 Conflicts:	issue-logo < 3.0-1
