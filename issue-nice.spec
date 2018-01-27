@@ -8,7 +8,7 @@ Summary:	Nice PLD Linux release file
 Summary(pl.UTF-8):	Ładna wersja Linuksa PLD
 Name:		issue-nice
 Version:	3.0
-Release:	9
+Release:	10
 License:	GPL
 Group:		Base
 Source0:	issue-make.sh
